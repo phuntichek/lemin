@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_ll_itoa.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscottie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscottie <sscottie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 12:40:34 by sscottie          #+#    #+#             */
-/*   Updated: 2019/04/27 13:18:56 by sscottie         ###   ########.fr       */
+/*   Updated: 2019/09/06 00:14:48 by sscottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_intlen(int nbr)
+static long long	ft_intlen(long nbr)
 {
-	int len;
+	long len;
 
 	len = 0;
 	len = (nbr <= 0 ? 1 : 0);
@@ -26,12 +26,12 @@ static int	ft_intlen(int nbr)
 	return (len);
 }
 
-char		*ft_itoa(int n)
+char				*ft_ll_itoa(long long n)
 {
-	unsigned int	nbr;
-	int				sign;
-	int				len;
-	char			*alpha;
+	unsigned long long	nbr;
+	int					sign;
+	long				len;
+	char				*alpha;
 
 	sign = (n < 0 ? 1 : 0);
 	alpha = NULL;

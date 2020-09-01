@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdonnor <rdonnor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/26 01:38:24 by rdonnor           #+#    #+#             */
-/*   Updated: 2020/05/26 01:38:24 by Student          ###   ########.fr       */
+/*   Created: 2020/05/31 19:38:39 by rdonnor           #+#    #+#             */
+/*   Updated: 2020/05/31 19:38:39 by rdonnor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstr(const char *str, const char *to_find)
+int		ft_printf(const char *fmt, ...)
 {
-	unsigned int i;
-	unsigned int j;
+	t_all		*st;
+	int			len;
 
-	if (!*to_find)
-		return ((char *)str);
-	i = 0;
-	while (str[i] != '\0')
+	if (!(st = (t_all*)malloc(sizeof(t_all))))
+		return (-1);
+	st->fmt = (char *)fmt;
+	st->fmt_cp = st->fmt;
+	st->i = 0;
+	len = ft_strlen(st->fmt);
+	st = init_st(st);
+	if (fmt)
 	{
-		j = 0;
-		while (to_find[j] == str[i + j])
-		{
-			if (to_find[j + 1] == '\0')
-			{
-				return ((char *)str + i);
-			}
-			j++;
-		}
-		i++;
+		va_start(st->args, fmt);
+		st->len = parse(st);
+		va_end(st->args);
 	}
-	return (0);
+	len = st->len;
+	free(st);
+	return (len);
 }

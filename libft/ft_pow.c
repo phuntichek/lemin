@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_pow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdonnor <rdonnor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/26 01:38:24 by rdonnor           #+#    #+#             */
-/*   Updated: 2020/05/26 01:38:24 by Student          ###   ########.fr       */
+/*   Created: 2019/10/04 19:22:31 by rdonnor           #+#    #+#             */
+/*   Updated: 2019/10/04 19:25:26 by rdonnor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstr(const char *str, const char *to_find)
+int		ft_pow(int x, unsigned int y)
 {
-	unsigned int i;
-	unsigned int j;
+	int temp;
 
-	if (!*to_find)
-		return ((char *)str);
-	i = 0;
-	while (str[i] != '\0')
-	{
-		j = 0;
-		while (to_find[j] == str[i + j])
-		{
-			if (to_find[j + 1] == '\0')
-			{
-				return ((char *)str + i);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (0);
+	if (y == 0)
+		return (1);
+	temp = ft_pow(x, y / 2);
+	if (y % 2 == 0)
+		return (temp * temp);
+	else
+		return (x * temp * temp);
 }

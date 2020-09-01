@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_arr.c                                      :+:      :+:    :+:   */
+/*   ft_round.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmelda <fmelda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sscottie <sscottie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/21 14:45:34 by fmelda            #+#    #+#             */
-/*   Updated: 2020/01/21 14:46:19 by fmelda           ###   ########.fr       */
+/*   Created: 2019/09/16 20:40:13 by sscottie          #+#    #+#             */
+/*   Updated: 2019/09/17 17:52:12 by sscottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <math.h>
 
-void		ft_free_arr(char ***arr)
+long	ft_round(double n, int precision)
 {
-	int		i;
+	long long	tmp;
 
-	i = -1;
-	if (*arr && (*arr)[0])
-	{
-		while ((*arr)[++i])
-			;
-		while (--i >= 0)
-		{
-			free((*arr)[i]);
-			(*arr)[i] = NULL;
-		}
-		free(*arr);
-		*arr = NULL;
-	}
-	else if (arr)
-	{
-		free(*arr);
-		*arr = NULL;
-	}
+	tmp = n * ft_pow(10, precision + 1);
+	if (tmp % 10 >= 5)
+		tmp = tmp / 10 + 1;
+	else if (tmp % 10 <= -5)
+		tmp = tmp / 10 - 1;
+	else
+		tmp /= 10;
+	return (tmp);
 }

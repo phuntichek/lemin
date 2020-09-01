@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdonnor <rdonnor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/26 01:38:24 by rdonnor           #+#    #+#             */
-/*   Updated: 2020/05/26 01:38:24 by Student          ###   ########.fr       */
+/*   Created: 2019/04/21 17:17:18 by rdonnor           #+#    #+#             */
+/*   Updated: 2020/02/07 13:11:31 by rdonnor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFF_SIZE 4
+# include "libft.h"
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 
-char	*ft_strstr(const char *str, const char *to_find)
+typedef struct	s_gnl
 {
-	unsigned int i;
-	unsigned int j;
+	char		buf[BUFF_SIZE + 1];
+	char		*tmp;
+	int			ret;
+}				t_gnl;
 
-	if (!*to_find)
-		return ((char *)str);
-	i = 0;
-	while (str[i] != '\0')
-	{
-		j = 0;
-		while (to_find[j] == str[i + j])
-		{
-			if (to_find[j + 1] == '\0')
-			{
-				return ((char *)str + i);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
+int				get_next_line(const int fd, char **line);
+
+#endif

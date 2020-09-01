@@ -6,7 +6,7 @@
 #    By: phuntik <phuntik@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/03 13:14:23 by fmelda            #+#    #+#              #
-#    Updated: 2020/07/29 16:26:15 by phuntik          ###   ########.fr        #
+#    Updated: 2020/08/10 16:43:23 by phuntik          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,11 +27,16 @@ LHS_DIR	=		$(LFT_DIR)
 SRC_FLS	=		main.c  			\
 				init.c				\
 				parse.c				\
-				print.c				\
+				parse2.c			\
 				tools.c				\
 				validation_links.c	\
 				write_links.c		\
 				write_rooms.c		\
+				free_tlemin.c		\
+				print_result.c		\
+				path.c				\
+				path1.c				\
+				stuff.c				\
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))

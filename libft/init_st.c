@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   init_st.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdonnor <rdonnor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/26 01:38:24 by rdonnor           #+#    #+#             */
-/*   Updated: 2020/05/26 01:38:24 by Student          ###   ########.fr       */
+/*   Created: 2020/05/31 19:40:33 by rdonnor           #+#    #+#             */
+/*   Updated: 2020/05/31 19:40:33 by rdonnor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstr(const char *str, const char *to_find)
+void	reinit_st(t_all *st)
 {
-	unsigned int i;
-	unsigned int j;
+	st->flag[0] = 'e';
+	st->flag[1] = 'e';
+	st->flag[2] = 'e';
+	st->size = '\0';
+	st->len = 0;
+	st->acc = -1;
+	st->sign = 0;
+}
 
-	if (!*to_find)
-		return ((char *)str);
-	i = 0;
-	while (str[i] != '\0')
-	{
-		j = 0;
-		while (to_find[j] == str[i + j])
-		{
-			if (to_find[j + 1] == '\0')
-			{
-				return ((char *)str + i);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (0);
+t_all	*init_st(t_all *st)
+{
+	st->flag[0] = 'e';
+	st->flag[1] = 'e';
+	st->flag[2] = 'e';
+	st->size = '\0';
+	st->len = 0;
+	st->acc = -1;
+	st->fmt_cp = st->fmt;
+	st->count = 0;
+	st->sign = 0;
+	return (st);
 }

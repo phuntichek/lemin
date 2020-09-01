@@ -12,91 +12,59 @@
 
 #include "lemin.h"
 
-bool			validation(t_lemin *lem)
+bool			validation(t_lemin **lem)
 {
-	if (!(check_rooms(lem)))
-		handle_err("validation: cant check room");
 	if (!(check_doubles(lem)))
-		handle_err("validation: cant check doubles");
+		handle_err("validation: cant check doubles", lem, 0, 0);
 	return (true);
 }
 
-bool			check_rooms(t_lemin *lem)
+void			while_check_doubles(t_lemin **lem, char **r1, char **r2)
 {
+	t_link		*help;
 	int			i;
-	int			j;
-	
+
 	i = 0;
-	j = 0;
-	lem->room = lem->head->first_room;
-	while (lem->room->next != NULL)
+	help = (*lem)->head->first_link;
+	while (help->next)
 	{
-		if (ft_strequ(lem->link->room1, lem->room->name))
+		if (ft_strequ(help->room1, *r1) && ft_strequ(help->room2, *r2))
 			i++;
-		if (ft_strequ(lem->link->room2, lem->room->name))
-			j++;
-		if (i == 1 && j == 1)
-			break ;
-		lem->room = lem->room->next;
+		help = help->next;
 	}
-	if (i == 0)
+	if (i > 0)
 	{
-		if (ft_strequ(lem->link->room1, lem->start->name) || ft_strequ(lem->link->room1, lem->end->name))
-			i++;
+		free(*r1);
+		free(*r2);
+		handle_err("check doubles: invalid room 1", lem, 0, 0);
 	}
-	if (j == 0)
-		if (ft_strequ(lem->link->room2, lem->start->name) || ft_strequ(lem->link->room2, lem->end->name))
-			j++;
-		print_in_file(0, "\ni = ", i);
-	print_in_file(0, "\n", -1);
-	print_in_file(0, "j = ", j);
-	if (i != 1 || j != 1)
-		handle_err("check rooms: wrong room");
-	if (ft_strequ(lem->link->room1, lem->link->room2))
-		handle_err("check rooms: same room in the link");
-	return (true);
 }
 
-bool			check_doubles(t_lemin *lem)
+bool			check_doubles(t_lemin **lem)
 {
 	int			i;
 	char		*r1;
 	char		*r2;
-	
+	t_link		*help;
+
 	i = 0;
-	r1 = ft_strdup(lem->link->room1);
-	r2 = ft_strdup(lem->link->room2);
-	lem->link = lem->head->first_link;
-	while (lem->link->next != NULL)
+	r1 = ft_strdup((*lem)->link->room1);
+	r2 = ft_strdup((*lem)->link->room2);
+	while_check_doubles(lem, &r1, &r2);
+	help = (*lem)->head->first_link;
+	while (help)
 	{
-		if (ft_strequ(lem->link->room1, r1) && ft_strequ(lem->link->room2, r2))
+		if (ft_strequ(help->room1, r2) && ft_strequ(help->room2, r1))
 			i++;
-		lem->link = lem->link->next;
+		help = help->next;
 	}
 	if (i > 0)
-		handle_err("check doubles: invalid room 1");
-	lem->link = lem->head->first_link;
-	i = 0;
-	while (lem->link->next != NULL)
 	{
-		if (ft_strequ(lem->link->room1, r2) && ft_strequ(lem->link->room2, r1))
-		{
-			print_in_file(0, "\n", -1);
-			print_in_file(0, lem->link->room1, -1);
-			print_in_file(0, " - ", -1);
-			print_in_file(0, lem->link->room2, -1);
-			print_in_file(0, "\n\n\n", -1);
-			print_in_file(0, r1, -1);
-			print_in_file(0, " - ", -1);
-			print_in_file(0, r2, -1);
-			print_in_file(0, "\n", -1);
-			i++;
-		}
-		lem->link = lem->link->next;
+		free(r1);
+		free(r2);
+		handle_err("check doubles: invalid room 2", lem, 0, 0);
 	}
-	print_in_file(0, "\ni in val link: ", i);
-	print_in_file(0, "\n", -1);
-	if (i > 0)
-		handle_err("check doubles: invalid room 2");
+	free(r1);
+	free(r2);
 	return (true);
 }

@@ -12,50 +12,25 @@
 
 #include "../includes/lemin.h"
 
-t_lemin			*init_lem()
+void			init_lem(t_lemin *lem)
 {
-	t_lemin		*lem;
-	
-	if (!(lem = (t_lemin *)ft_memalloc(sizeof(t_lemin))))
-		exit(EXIT_FAILURE);
-	lem->room = init_room();
-	lem->link = init_link();
+	lem->count_rooms = 0;
+	lem->room = NULL;
+	lem->link = NULL;
 	lem->head = init_head();
 	lem->end = init_end();
 	lem->start = init_start();
 	lem->aunt = init_aunt();
-	return (lem);
+	lem->table = NULL;
+	lem->statuses = NULL;
+	lem->copy = NULL;
+	lem->map = NULL;
 }
 
-t_room			*init_room()
-{
-	t_room		*room;
-
-	if(!(room = (t_room *)ft_memalloc(sizeof(t_room))))
-		exit(EXIT_FAILURE);
-	room->name = NULL;
-	room->next = NULL;
-	room->x = 0;
-	room->y = 0;
-	return(room);
-}
-
-t_link			*init_link()
-{
-	t_link		*link;
-	
-	if (!(link = (t_link *)ft_memalloc(sizeof(t_link))))
-		exit(EXIT_FAILURE);
-	link->room1 = NULL;
-	link->room2 = NULL;
-	link->next = NULL;
-	return (link);
-}
-
-t_start			*init_start()
+t_start			*init_start(void)
 {
 	t_start		*start;
-	
+
 	if (!(start = (t_start *)ft_memalloc(sizeof(t_start))))
 		exit(EXIT_FAILURE);
 	start->name = NULL;
@@ -64,7 +39,7 @@ t_start			*init_start()
 	return (start);
 }
 
-t_end			*init_end()
+t_end			*init_end(void)
 {
 	t_end		*end;
 
@@ -76,10 +51,10 @@ t_end			*init_end()
 	return (end);
 }
 
-t_head			*init_head()
+t_head			*init_head(void)
 {
 	t_head		*head;
-	
+
 	if (!(head = (t_head *)ft_memalloc(sizeof(t_head))))
 		exit(EXIT_FAILURE);
 	head->first_link = NULL;
@@ -87,7 +62,7 @@ t_head			*init_head()
 	return (head);
 }
 
-t_aunt			*init_aunt()
+t_aunt			*init_aunt(void)
 {
 	t_aunt		*aunt;
 
